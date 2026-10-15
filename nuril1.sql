@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2024 at 02:40 AM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 5.6.37
+-- Waktu pembuatan: 15 Okt 2026 pada 03.10
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `widodo`
+-- Database: `nuril1`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `buku`
+-- Struktur dari tabel `buku`
 --
 
 CREATE TABLE `buku` (
@@ -35,38 +34,39 @@ CREATE TABLE `buku` (
   `penulis` varchar(255) DEFAULT NULL,
   `penerbit` varchar(255) DEFAULT NULL,
   `tahun_terbit` varchar(255) DEFAULT NULL,
-  `deksripsi` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `deksripsi` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `buku`
+-- Dumping data untuk tabel `buku`
 --
 
 INSERT INTO `buku` (`id_buku`, `id_katagori`, `judul`, `penulis`, `penerbit`, `tahun_terbit`, `deksripsi`) VALUES
-(1, 1, 'DIa jatuh cinta pada sahabat', 'Yanto', 'SMJ Yanto', '2009', 'Sebuah novel yg menceritakan seorang sahabat yg jatuh cinta pada sahabatnya!');
+(1, 1, 'NURIL CEO', 'Nuril gntg', 'My Nuril', '2028', 'Perjalanan Nuril Menjadi CEO,\r\nKisah Keluh Kesah!');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `katagori`
+-- Struktur dari tabel `katagori`
 --
 
 CREATE TABLE `katagori` (
   `id_katagori` int(11) NOT NULL,
   `katagori` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `katagori`
+-- Dumping data untuk tabel `katagori`
 --
 
 INSERT INTO `katagori` (`id_katagori`, `katagori`) VALUES
-(1, 'Novel');
+(1, 'History Nuril'),
+(5, 'ff');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `peminjaman`
+-- Struktur dari tabel `peminjaman`
 --
 
 CREATE TABLE `peminjaman` (
@@ -76,33 +76,33 @@ CREATE TABLE `peminjaman` (
   `tanggal_peminjaman` varchar(255) DEFAULT NULL,
   `tanggal_pengembalian` varchar(255) DEFAULT NULL,
   `status_peminjaman` enum('dipinjam','dikembalikan') DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ulasan`
+-- Struktur dari tabel `ulasan`
 --
 
 CREATE TABLE `ulasan` (
   `id_ulasan` int(11) NOT NULL,
   `id_user` int(11) DEFAULT NULL,
   `id_buku` int(11) DEFAULT NULL,
-  `ulasan` text,
+  `ulasan` text DEFAULT NULL,
   `rating` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `ulasan`
+-- Dumping data untuk tabel `ulasan`
 --
 
 INSERT INTO `ulasan` (`id_ulasan`, `id_user`, `id_buku`, `ulasan`, `rating`) VALUES
-(1, 1, 1, 'Goodjob', 10);
+(1, 1, 1, 'Keren Bet Cuiii', 100);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -111,49 +111,45 @@ CREATE TABLE `user` (
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `alamat` text,
+  `alamat` text DEFAULT NULL,
   `no_telpon` varchar(255) DEFAULT NULL,
   `level` enum('admin','petugas','peminjam') DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `username`, `password`, `email`, `alamat`, `no_telpon`, `level`) VALUES
 (1, 'Administrator', 'Admin', '69c718b3fc62b6afe09472e56a594c3b', 'admin@gmail.com', 'Jakarta utara', '08121232452', 'admin'),
-(2, 'Petugas', 'Petugas', '2d77b357a697fb0510966568996c076b', 'petugas@gmail.com', 'jakarta utara', '08128222222', 'petugas'),
-(3, 'Siswa 1', 'peminjam1', '2c5efcd61731f0dd3421817e5e913794', 'peminjam@gmail.com', 'jak', '08124552557', 'peminjam'),
-(5, 'Peminjam2', 'Peminjam2', '2c5efcd61731f0dd3421817e5e913794', NULL, NULL, NULL, 'peminjam'),
-(6, 'Widodo', 'Widodo', '202cb962ac59075b964b07152d234b70', '', '', '', ''),
-(7, 'Peminjam', 'Peminjam', 'c2095dfbc6af73974da22d5a0a772459', '', '', '', 'peminjam');
+(8, 'nuril26', '26', '81dc9bdb52d04dc20036dbd8313ed055', '', '', '', 'admin');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `buku`
+-- Indeks untuk tabel `buku`
 --
 ALTER TABLE `buku`
   ADD PRIMARY KEY (`id_buku`),
   ADD KEY `id_katagori` (`id_katagori`);
 
 --
--- Indexes for table `katagori`
+-- Indeks untuk tabel `katagori`
 --
 ALTER TABLE `katagori`
   ADD PRIMARY KEY (`id_katagori`);
 
 --
--- Indexes for table `peminjaman`
+-- Indeks untuk tabel `peminjaman`
 --
 ALTER TABLE `peminjaman`
   ADD KEY `id_user` (`id_user`),
   ADD KEY `id_buku` (`id_buku`);
 
 --
--- Indexes for table `ulasan`
+-- Indeks untuk tabel `ulasan`
 --
 ALTER TABLE `ulasan`
   ADD PRIMARY KEY (`id_ulasan`),
@@ -161,58 +157,58 @@ ALTER TABLE `ulasan`
   ADD KEY `id_buku` (`id_buku`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `buku`
+-- AUTO_INCREMENT untuk tabel `buku`
 --
 ALTER TABLE `buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `katagori`
+-- AUTO_INCREMENT untuk tabel `katagori`
 --
 ALTER TABLE `katagori`
-  MODIFY `id_katagori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_katagori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `ulasan`
+-- AUTO_INCREMENT untuk tabel `ulasan`
 --
 ALTER TABLE `ulasan`
   MODIFY `id_ulasan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `buku`
+-- Ketidakleluasaan untuk tabel `buku`
 --
 ALTER TABLE `buku`
   ADD CONSTRAINT `buku_ibfk_1` FOREIGN KEY (`id_katagori`) REFERENCES `katagori` (`id_katagori`);
 
 --
--- Constraints for table `peminjaman`
+-- Ketidakleluasaan untuk tabel `peminjaman`
 --
 ALTER TABLE `peminjaman`
   ADD CONSTRAINT `peminjaman_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
   ADD CONSTRAINT `peminjaman_ibfk_2` FOREIGN KEY (`id_buku`) REFERENCES `buku` (`id_buku`);
 
 --
--- Constraints for table `ulasan`
+-- Ketidakleluasaan untuk tabel `ulasan`
 --
 ALTER TABLE `ulasan`
   ADD CONSTRAINT `ulasan_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
